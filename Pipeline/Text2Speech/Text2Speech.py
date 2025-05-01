@@ -40,13 +40,13 @@ class textToSpeech:
                 speech = speech.cpu()
         return speech.numpy()
     
-    async def speak(self, text):
+    def speak(self, text):
         audio = self.synthesize(text)
         sd.play(audio, samplerate=16000)
         sd.wait()  # Wait until audio is finished playing
         return 
 
 
-if __name__ == "__main__":
-    tts = textToSpeech()  # Initialize once (loads models)
-    tts.speak("Hello world! This is a test of text to speech.")
+# if __name__ == "__main__":
+#     tts = textToSpeech()  # Initialize once (loads models)
+#     tts.speak("Hello world! This is a test of text to speech.")
