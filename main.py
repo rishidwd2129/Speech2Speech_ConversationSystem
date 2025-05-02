@@ -7,6 +7,7 @@ import soundfile as sf
 import numpy as np
 from typing import Optional
 from Pipeline.Text2Speech.Text2Speech import textToSpeech
+from Pipeline.Stream.SpeechStream import stream
 app = FastAPI()
 tts_engine = textToSpeech()
 # @app.get("/Generate")  # Changed to GET since we're using query params
@@ -26,11 +27,12 @@ async def text2speech(text: str):
     result = generate(text)
     output_text = result["response"]
     
-    max_length = 550  # Keep a little buffer <600
-    if len(output_text) > max_length:
-        output_text = output_text[:max_length]
+    stream(tts_engine, output_text)
+    # max_length = 550  # Keep a little buffer <600
+    # if len(output_text) > max_length:
+    #     output_text = output_text[:max_length]
     
-    tts_engine.speak(output_text)
+    # tts_engine.speak(output_text)
 
     return {"status": "success", "message": "Audio played successfully"}
 
