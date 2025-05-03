@@ -40,8 +40,8 @@ class textToSpeech:
                 speech = speech.cpu()
         return speech.numpy()
     
-    def speak(self, text):
-        audio = self.synthesize(text)
+    def speak(self, audio):
+        # audio = self.synthesize(text)
         sd.play(audio, samplerate=16000)
         sd.wait()  # Wait until audio is finished playing
         return 
